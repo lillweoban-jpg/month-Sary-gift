@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Months & Counting</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            color: #2d3436;
+        }
+
+        h1 { font-size: 1.8rem; margin-bottom: 10px; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+        
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.4);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .timer-box span { display: block; font-weight: bold; font-size: 1.2rem; color: #ff4757; }
+        .timer-box label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .message { font-style: italic; margin-bottom: 30px; line-height: 1.5; }
+
+        .btn-celebrate {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+            transition: 0.3s ease;
+        }
+
+        .btn-celebrate:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+    <div class="glass-card">
+        <h1>Our 7th Month</h1>
+        <p class="message">"Seven months of laughs, late-night talks, and growing together. I'd choose you every single time."</p>
+        
+        <div class="timer-grid">
+            <div class="timer-box"><span id="days">0</span><label>Days</label></div>
+            <div class="timer-box"><span id="hours">0</span><label>Hours</label></div>
+            <div class="timer-box"><span id="mins">0</span><label>Mins</label></div>
+            <div class="timer-box"><span id="secs">0</span><label>Secs</label></div>
+        </div>
+
+        <button class="btn-celebrate" onclick="pop()">Click for Magic ✨</button>
+    </div>
+
+    <script>
+        // SET YOUR START DATE HERE (Year, Month index [0-11], Day)
+        const startDate = new Date(2025, 7, 10); // Example: Aug 10, 2025
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('mins').innerText = Math.floor((diff / 1000 / 60) % 60);
+            document.getElementById('secs').innerText = Math.floor((diff / 1000) % 60);
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        function pop() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4757', '#ffffff', '#ffafbd']
+            });
+        }
+
+        // Auto-fire confetti on entry
+        window.onload = () => {
+            setTimeout(pop, 500);
+        };
+    </script>
+</body>
+</html>
